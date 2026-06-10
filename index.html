@@ -3,24 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Career Signal Lab</title>
+    <title>SolaRPlexus</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="sky-vignette" aria-hidden="true"></div>
+    <div class="solar-lockup-glow" aria-hidden="true"></div>
+
     <main class="app-shell">
       <header class="topbar">
-        <div class="brand-block">
-          <div class="brand-mark" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div>
-            <p class="eyebrow">AI portfolio builder</p>
-            <h1>Career Signal Lab</h1>
-          </div>
-        </div>
+        <a class="brand" href="#" aria-label="SolaRPlexus home">
+          <span class="brand-emblem" aria-hidden="true">
+            <span class="brand-sun"></span>
+            <span class="brand-ring ring-one"></span>
+            <span class="brand-ring ring-two"></span>
+            <span class="brand-core">SP</span>
+          </span>
+          <span class="brand-copy">
+            <strong><span>SolaR</span><span>Plexus</span></strong>
+            <small>AI trainer career intelligence</small>
+          </span>
+        </a>
         <div class="topbar-actions">
+          <span class="save-status" id="saveStatus">Ready</span>
           <button class="icon-button" id="resetButton" type="button" aria-label="Reset workspace" title="Reset workspace">
             <svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="M3 12a9 9 0 1 0 3-6.7" />
@@ -33,160 +38,418 @@
               <path d="m7 10 5 5 5-5" />
               <path d="M5 21h14" />
             </svg>
-            Export pitch
+            Export application kit
           </button>
         </div>
       </header>
 
-      <section class="workspace" aria-label="Career project generator">
-        <aside class="input-panel" aria-label="Inputs">
+      <section class="proof-bar" aria-label="Application proof summary">
+        <div class="proof-lead">
+          <p class="eyebrow">Premium career intelligence</p>
+          <h2>Resume fit, company tailoring, recruiter scan, and AI-trainer judgment in one local workspace.</h2>
+        </div>
+        <div class="proof-metrics">
+          <article>
+            <span>Best Fit</span>
+            <strong id="proofRoleValue">AI Quality Analyst</strong>
+          </article>
+          <article>
+            <span>Readiness</span>
+            <strong id="proofReadinessValue">98%</strong>
+          </article>
+          <article>
+            <span>Company</span>
+            <strong id="proofCompanyValue">Handshake</strong>
+          </article>
+          <article>
+            <span>Evidence Pack</span>
+            <strong id="proofEvidenceValue">Scan + Rubric</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Resume fit analyzer">
+        <aside class="input-panel" aria-label="Candidate and job inputs">
           <div class="panel-heading">
-            <p class="eyebrow">Profile</p>
-            <h2>Your target</h2>
+            <p class="eyebrow">Candidate profile</p>
+            <h2>Resume source</h2>
           </div>
 
           <label class="field">
-            <span>Target role</span>
-            <input id="targetRole" type="text" value="AI Product Analyst Intern" />
+            <span>Target job title</span>
+            <input id="targetJob" type="text" value="AI Content Quality Analyst" />
           </label>
 
           <label class="field">
-            <span>Field or mission</span>
-            <input id="mission" type="text" value="Helping first-generation students find roles that match their strengths" />
+            <span>Company</span>
+            <input id="companyName" type="text" value="Handshake" />
           </label>
 
           <label class="field">
-            <span>Profile notes</span>
-            <textarea id="profileNotes" rows="7">Built a student club dashboard in Python, led peer mentoring workshops, analyzed survey data in Excel, and designed onboarding materials for new members.</textarea>
+            <span>Resume or background notes</span>
+            <textarea id="resumeText" rows="9">Peer mentor and student club operations lead with experience writing clear feedback, analyzing survey data in Excel, building dashboards, facilitating workshops, documenting decisions, and helping students improve resumes and career stories. Comfortable using AI tools responsibly, comparing outputs, and explaining recommendations to non-technical audiences.</textarea>
           </label>
 
           <label class="field">
-            <span>Job description or employer signals</span>
-            <textarea id="jobSignals" rows="7">Looking for someone who can use AI tools, build dashboards, explain insights to stakeholders, work with messy data, and design responsible user experiences.</textarea>
+            <span>Job post or company signals</span>
+            <textarea id="jobText" rows="8">The role needs strong writing, data judgment, quality review, AI tool fluency, attention to detail, stakeholder communication, inclusive thinking, and the ability to turn messy information into clear recommendations for students and employers.</textarea>
           </label>
 
           <div class="control-group">
-            <span class="control-label">Build window</span>
-            <div class="segmented" role="radiogroup" aria-label="Build window">
+            <span class="control-label">Tailoring style</span>
+            <div class="segmented" role="radiogroup" aria-label="Tailoring style">
               <label>
-                <input type="radio" name="window" value="weekend" />
-                <span>Weekend</span>
+                <input type="radio" name="tailorMode" value="concise" />
+                <span>Concise</span>
               </label>
               <label>
-                <input type="radio" name="window" value="week" checked />
-                <span>1 week</span>
+                <input type="radio" name="tailorMode" value="balanced" checked />
+                <span>Balanced</span>
               </label>
               <label>
-                <input type="radio" name="window" value="sprint" />
-                <span>2 weeks</span>
+                <input type="radio" name="tailorMode" value="bold" />
+                <span>Bold</span>
               </label>
             </div>
           </div>
 
           <div class="control-group">
-            <span class="control-label">Project angle</span>
-            <select id="projectAngle">
-              <option value="responsible-ai">Responsible AI</option>
-              <option value="automation">Workflow automation</option>
-              <option value="analytics">Decision analytics</option>
-              <option value="ux-research">UX research</option>
+            <span class="control-label">Career direction</span>
+            <select id="careerDirection">
+              <option value="auto">Find best fit automatically</option>
+              <option value="ai-quality">AI, quality, and training</option>
+              <option value="data">Data and analytics</option>
+              <option value="product">Product and operations</option>
+              <option value="customer">Customer success and community</option>
+              <option value="marketing">Marketing and communications</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">AI trainer scenario</span>
+            <select id="trainerScenario">
+              <option value="quality">Response quality</option>
+              <option value="hallucination">Hallucination check</option>
+              <option value="instruction">Instruction following</option>
+              <option value="fairness">Fairness and bias</option>
+              <option value="safety">Safety boundary</option>
             </select>
           </div>
 
           <div class="examples">
-            <span class="control-label">Sample starters</span>
+            <span class="control-label">Profile starters</span>
             <div class="chip-row">
-              <button class="chip active" type="button" data-example="product">Product</button>
+              <button class="chip active" type="button" data-example="career">Career</button>
               <button class="chip" type="button" data-example="data">Data</button>
-              <button class="chip" type="button" data-example="software">Software</button>
-              <button class="chip" type="button" data-example="research">Research</button>
+              <button class="chip" type="button" data-example="support">Support</button>
+              <button class="chip" type="button" data-example="marketing">Marketing</button>
+              <button class="chip" type="button" data-example="engineering">Engineering</button>
             </div>
           </div>
         </aside>
 
         <section class="output-panel" aria-live="polite">
-          <div class="project-hero">
-            <div>
-              <p class="eyebrow">Recommended showcase project</p>
-              <h2 id="projectTitle">Opportunity Lens</h2>
-              <p id="projectThesis" class="thesis"></p>
+          <section class="hero-panel">
+            <div class="hero-copy">
+              <p class="eyebrow">Best-fit recommendation</p>
+              <h2 id="heroTitle">Career Fit Analyzer</h2>
+              <p id="heroThesis" class="thesis"></p>
             </div>
-            <div class="score-dial" aria-label="Employer signal score">
+            <div class="score-dial" aria-label="Application readiness score">
               <svg viewBox="0 0 120 120" role="img" aria-labelledby="scoreLabel">
-                <title id="scoreLabel">Employer signal score</title>
+                <title id="scoreLabel">Application readiness score</title>
                 <circle class="track" cx="60" cy="60" r="48"></circle>
                 <circle class="progress" id="scoreCircle" cx="60" cy="60" r="48"></circle>
               </svg>
               <div>
-                <strong id="signalScore">86</strong>
-                <span>signal</span>
+                <strong id="readinessScore">91</strong>
+                <span>ready</span>
               </div>
             </div>
-          </div>
+          </section>
 
           <div class="metrics-grid">
             <article class="metric">
-              <span>Role fit</span>
-              <strong id="roleFit">High</strong>
+              <span>Best role fit</span>
+              <strong id="bestRoleMetric">AI Quality Analyst</strong>
             </article>
             <article class="metric">
-              <span>Differentiator</span>
-              <strong id="differentiator">Explainable AI</strong>
+              <span>Company alignment</span>
+              <strong id="companyMetric">Strong</strong>
             </article>
             <article class="metric">
-              <span>Demo size</span>
-              <strong id="demoSize">7 days</strong>
+              <span>Resume match</span>
+              <strong id="resumeMetric">8 signals</strong>
             </article>
+            <article class="metric">
+              <span>Next move</span>
+              <strong id="nextMoveMetric">Tailor bullets</strong>
+            </article>
+          </div>
+
+          <section class="section-block full-span">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">Handshake forum fit</p>
+                <h3>Recommended Job Matches</h3>
+              </div>
+              <span id="fitSummary">ranked from resume evidence</span>
+            </div>
+            <div id="roleCards" class="role-grid"></div>
+          </section>
+
+          <div class="section-grid">
+            <section class="section-block premium-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Hiring manager view</p>
+                  <h3>Candidate Brief</h3>
+                </div>
+                <span id="briefSummary">positioning memo</span>
+              </div>
+              <div id="managerBrief" class="brief-grid"></div>
+            </section>
+
+            <section class="section-block premium-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Proof ledger</p>
+                  <h3>Evidence Ledger</h3>
+                </div>
+                <span id="ledgerSummary">claims to defend</span>
+              </div>
+              <div id="evidenceLedger" class="evidence-ledger"></div>
+            </section>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block premium-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Recruiter lens</p>
+                  <h3>Seven-Second Scan</h3>
+                </div>
+                <span id="scanSummary">first impression</span>
+              </div>
+              <div id="recruiterScan" class="insight-list"></div>
+            </section>
+
+            <section class="section-block premium-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Believability check</p>
+                  <h3>Cover Letter Audit</h3>
+                </div>
+                <span id="auditSummary">authenticity score</span>
+              </div>
+              <div id="letterAudit" class="insight-list"></div>
+            </section>
           </div>
 
           <div class="section-grid">
             <section class="section-block">
               <div class="section-title">
-                <h3>Skill Evidence</h3>
-                <span id="coverageText">6 matched signals</span>
+                <h3>Resume Signal Map</h3>
+                <span id="signalSummary">evidence coverage</span>
               </div>
-              <div class="bar-list" id="skillBars"></div>
+              <div id="signalBars" class="bar-list"></div>
             </section>
 
             <section class="section-block">
               <div class="section-title">
-                <h3>Signal Map</h3>
-                <span>fit, proof, story</span>
+                <h3>Fit Radar</h3>
+                <span>resume vs role</span>
               </div>
-              <canvas id="signalCanvas" width="520" height="320" aria-label="Career signal map"></canvas>
+              <canvas id="fitCanvas" width="560" height="330" aria-label="Resume fit radar chart"></canvas>
             </section>
           </div>
 
           <div class="section-grid">
             <section class="section-block">
               <div class="section-title">
-                <h3>Build Plan</h3>
-                <span id="planPace">1 week sprint</span>
+                <h3>Tailored Resume Bullets</h3>
+                <button class="ghost-button" id="copyBulletsButton" type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="11" height="11" rx="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                  <span>Copy bullets</span>
+                </button>
               </div>
-              <ol class="timeline" id="timeline"></ol>
+              <ul id="bulletList" class="bullet-list"></ul>
             </section>
 
             <section class="section-block">
               <div class="section-title">
-                <h3>AI Methods</h3>
-                <span>transparent prototype</span>
+                <h3>Skill Gap Planner</h3>
+                <span id="gapSummary">priority actions</span>
               </div>
-              <ul class="method-list" id="methodList"></ul>
+              <div id="gapList" class="gap-list"></div>
+            </section>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block">
+              <div class="section-title">
+                <h3>Top Candidate Story</h3>
+                <span>interview-ready</span>
+              </div>
+              <div id="storyList" class="story-list"></div>
+            </section>
+
+            <section class="section-block">
+              <div class="section-title">
+                <h3>ATS Keyword Plan</h3>
+                <span id="keywordSummary">matched and missing</span>
+              </div>
+              <div id="keywordList" class="keyword-list"></div>
             </section>
           </div>
 
           <section class="section-block full-span">
             <div class="section-title">
-              <h3>Showcase Pitch</h3>
-              <button class="ghost-button" id="copyButton" type="button">
+              <div>
+                <p class="eyebrow">Company-specific draft</p>
+                <h3>Cover Letter Studio</h3>
+              </div>
+              <button class="ghost-button" id="copyLetterButton" type="button">
                 <svg aria-hidden="true" viewBox="0 0 24 24">
                   <rect x="9" y="9" width="11" height="11" rx="2" />
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                 </svg>
-                Copy
+                <span>Copy letter</span>
               </button>
             </div>
-            <textarea id="pitchText" class="pitch-box" rows="7" readonly></textarea>
+            <textarea id="coverLetter" class="letter-box" rows="13" readonly></textarea>
+          </section>
+
+          <section class="section-block full-span premium-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">Handshake outreach</p>
+                <h3>Recruiter Message Studio</h3>
+              </div>
+              <button class="ghost-button" id="copyOutreachButton" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <span>Copy message</span>
+              </button>
+            </div>
+            <textarea id="outreachMessage" class="outreach-box" rows="8" readonly></textarea>
+          </section>
+
+          <section class="section-block full-span proof-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">AI trainer signal</p>
+                <h3>Proof of Judgment Lab</h3>
+              </div>
+              <button class="ghost-button" id="copyProofButton" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <span>Copy proof</span>
+              </button>
+            </div>
+            <div id="trainerProof" class="proof-grid"></div>
+          </section>
+
+          <div class="section-grid">
+            <section class="section-block proof-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Model evaluation</p>
+                  <h3>Evaluation Scorecard</h3>
+                </div>
+                <span id="scorecardSummary">criterion-level</span>
+              </div>
+              <div id="evaluationScorecard" class="scorecard-list"></div>
+            </section>
+
+            <section class="section-block premium-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Portfolio proof</p>
+                  <h3>Showcase Proof Pack</h3>
+                </div>
+                <button class="ghost-button" id="copyProofPackButton" type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="11" height="11" rx="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                  <span>Copy pack</span>
+                </button>
+              </div>
+              <div id="portfolioProofPack" class="proofpack-list"></div>
+            </section>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block proof-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Error analysis</p>
+                  <h3>AI Trainer Error Taxonomy</h3>
+                </div>
+                <span id="taxonomySummary">failure modes</span>
+              </div>
+              <div id="errorTaxonomy" class="taxonomy-grid"></div>
+            </section>
+
+            <section class="section-block">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Interview readiness</p>
+                  <h3>Interview Drill</h3>
+                </div>
+                <span id="drillSummary">practice prompts</span>
+              </div>
+              <div id="interviewDrill" class="drill-list"></div>
+            </section>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block proof-panel">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Evaluator calibration</p>
+                  <h3>Rubric Matrix</h3>
+                </div>
+                <span id="rubricSummary">trainer-ready</span>
+              </div>
+              <div id="rubricMatrix" class="rubric-grid"></div>
+            </section>
+
+            <section class="section-block">
+              <div class="section-title">
+                <div>
+                  <p class="eyebrow">Integrity layer</p>
+                  <h3>Application Guardrails</h3>
+                </div>
+                <span id="guardrailSummary">risk controls</span>
+              </div>
+              <div id="guardrailList" class="guardrail-list"></div>
+            </section>
+          </div>
+
+          <section class="section-block full-span">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">Submission ready</p>
+                <h3>Application Kit</h3>
+              </div>
+              <button class="ghost-button" id="copyKitButton" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <span>Copy kit</span>
+              </button>
+            </div>
+            <textarea id="applicationKit" class="pitch-box" rows="13" readonly></textarea>
           </section>
         </section>
       </section>
