@@ -632,10 +632,78 @@ select:focus {
 }
 
 .control-group,
-.examples {
+.examples,
+.company-actions {
   display: grid;
   gap: 8px;
   margin-top: 14px;
+}
+
+.company-actions {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  margin: -4px 0 14px;
+}
+
+.company-actions span,
+.upload-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.upload-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin: -2px 0 14px;
+  padding: 12px;
+  border: 1px dashed rgba(140, 242, 255, 0.42);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(140, 242, 255, 0.08), transparent 44%),
+    rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.upload-card.is-dragging,
+.upload-card:focus-visible {
+  border-color: rgba(255, 230, 163, 0.72);
+  outline: none;
+  background:
+    linear-gradient(135deg, rgba(255, 230, 163, 0.12), transparent 44%),
+    rgba(255, 255, 255, 0.075);
+}
+
+.upload-card.has-error {
+  border-color: rgba(255, 138, 168, 0.62);
+  background:
+    linear-gradient(135deg, rgba(255, 138, 168, 0.1), transparent 44%),
+    rgba(255, 255, 255, 0.055);
+}
+
+.upload-card.has-error p {
+  color: var(--rose);
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.upload-title {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 950;
 }
 
 .segmented {
@@ -844,6 +912,7 @@ select:focus {
 .keyword-card,
 .insight-card,
 .proof-card,
+.company-card,
 .brief-card,
 .ledger-row,
 .rubric-card,
@@ -924,6 +993,7 @@ select:focus {
 .story-list,
 .keyword-list,
 .insight-list,
+.company-brief,
 .brief-grid,
 .evidence-ledger,
 .rubric-grid,
@@ -989,6 +1059,7 @@ select:focus {
 .keyword-card,
 .insight-card,
 .proof-card,
+.company-card,
 .brief-card,
 .ledger-row,
 .rubric-card,
@@ -1009,6 +1080,7 @@ select:focus {
 .story-item header,
 .insight-card header,
 .proof-card header,
+.company-card header,
 .brief-card header,
 .ledger-row header,
 .rubric-card header,
@@ -1029,6 +1101,7 @@ select:focus {
 .keyword-card strong,
 .insight-card strong,
 .proof-card strong,
+.company-card strong,
 .brief-card strong,
 .ledger-row strong,
 .rubric-card strong,
@@ -1046,6 +1119,7 @@ select:focus {
 .keyword-card p,
 .insight-card p,
 .proof-card p,
+.company-card p,
 .brief-card p,
 .ledger-row p,
 .rubric-card p,
@@ -1123,6 +1197,26 @@ select:focus {
   background:
     linear-gradient(135deg, rgba(140, 242, 255, 0.08), transparent 34%),
     rgba(5, 10, 28, 0.76);
+}
+
+.company-panel {
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 230, 163, 0.1), transparent 18rem),
+    linear-gradient(135deg, rgba(140, 242, 255, 0.08), transparent 34%),
+    rgba(5, 10, 28, 0.76);
+}
+
+.company-brief {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.company-card {
+  display: grid;
+  gap: 7px;
+}
+
+.company-card .brief-value {
+  color: var(--green);
 }
 
 .proof-panel {
@@ -1385,6 +1479,7 @@ select:focus {
   .workspace,
   .section-grid,
   .proof-grid,
+  .company-brief,
   .brief-grid,
   .rubric-grid,
   .taxonomy-grid,

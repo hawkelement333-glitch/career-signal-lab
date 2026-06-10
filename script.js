@@ -1,3 +1,7 @@
+const PROJECT_NAME = "SolaRPlexus Project Moonlight";
+const COMPANY_BRIEF_START = "--- Project Moonlight Company Signal Brief ---";
+const COMPANY_BRIEF_END = "--- End Project Moonlight Company Signal Brief ---";
+
 const roleLibrary = [
   {
     id: "ai-quality",
@@ -101,7 +105,7 @@ const signalTaxonomy = [
 const examples = {
   career: {
     targetJob: "AI Content Quality Analyst",
-    companyName: "Handshake",
+    companyName: "OpenAI",
     direction: "auto",
     trainerScenario: "quality",
     resume:
@@ -111,7 +115,7 @@ const examples = {
   },
   data: {
     targetJob: "Data Analyst Intern",
-    companyName: "Handshake",
+    companyName: "Microsoft",
     direction: "data",
     trainerScenario: "hallucination",
     resume:
@@ -149,6 +153,72 @@ const examples = {
     job:
       "Troubleshoot technical issues, read logs, reproduce bugs, communicate with customers, write clear documentation, understand APIs, collaborate with engineering, and improve support workflows."
   }
+};
+
+const companyProfileLibrary = [
+  {
+    id: "ai-lab",
+    match: ["openai", "anthropic", "deepmind", "perplexity", "cohere", "mistral", "hugging face", "dataannotation", "outlier", "scale ai", "invisible", "surge", "appen", "telus"],
+    type: "AI lab or model operations company",
+    signals: ["evaluation quality", "clear rationales", "policy judgment", "edge-case thinking", "privacy awareness"],
+    proofAngle: "Frame your resume around careful evaluation, instruction following, evidence-based writing, and the ability to improve model outputs without overclaiming.",
+    watchout: "Do not imply model, policy, or labeling experience unless the resume actually proves it.",
+    searchTerms: ["AI evaluator roles", "responsible AI principles", "data quality standards"]
+  },
+  {
+    id: "big-tech",
+    match: ["google", "microsoft", "meta", "apple", "amazon", "nvidia", "adobe", "oracle", "ibm", "intel", "amd"],
+    type: "large technology company",
+    signals: ["scale", "cross-functional communication", "data fluency", "customer impact", "structured problem solving"],
+    proofAngle: "Connect your strongest evidence to scalable systems, measurable outcomes, documentation, and clean handoffs between teams.",
+    watchout: "Avoid broad prestige language; use specific examples that show what you personally owned.",
+    searchTerms: ["company values", "early career roles", "technical support expectations"]
+  },
+  {
+    id: "product-saas",
+    match: ["notion", "figma", "salesforce", "hubspot", "atlassian", "asana", "monday", "slack", "linear", "airtable", "canva"],
+    type: "product-led SaaS company",
+    signals: ["workflow empathy", "documentation", "customer insight", "product feedback", "process improvement"],
+    proofAngle: "Show how you translate messy user needs into clear workflows, training, docs, or support loops.",
+    watchout: "Do not sound like a generic fan of the product; prove you understand users and outcomes.",
+    searchTerms: ["customer stories", "product principles", "support documentation"]
+  },
+  {
+    id: "consumer-brand",
+    match: ["spotify", "netflix", "duolingo", "airbnb", "roblox", "tiktok", "pinterest", "reddit", "discord", "twitch"],
+    type: "consumer product or community platform",
+    signals: ["audience empathy", "trust and safety", "content quality", "community judgment", "experimentation"],
+    proofAngle: "Emphasize audience awareness, clear communication, fairness, and the ability to improve user-facing experiences.",
+    watchout: "Balance enthusiasm with operational proof; reviewers still need concrete actions and results.",
+    searchTerms: ["community guidelines", "brand voice", "user experience roles"]
+  },
+  {
+    id: "finance-health",
+    match: ["jpmorgan", "chase", "goldman", "capital one", "visa", "mastercard", "stripe", "robinhood", "unitedhealth", "cvs", "walgreens", "humana"],
+    type: "regulated or high-trust company",
+    signals: ["accuracy", "privacy", "compliance awareness", "risk review", "clear escalation"],
+    proofAngle: "Lead with reliability, careful documentation, ethical judgment, and respect for sensitive information.",
+    watchout: "Never invent certifications, compliance training, or domain expertise that is not in the resume.",
+    searchTerms: ["compliance expectations", "privacy principles", "analyst role requirements"]
+  },
+  {
+    id: "education-career",
+    match: ["handshake", "coursera", "chegg", "khan academy", "quizlet", "udemy", "linkedin", "indeed", "glassdoor"],
+    type: "education, career, or talent marketplace",
+    signals: ["student outcomes", "career storytelling", "inclusive access", "coaching", "marketplace quality"],
+    proofAngle: "Connect resume evidence to helping people make better decisions, communicate strengths, and navigate opportunity.",
+    watchout: "Avoid making the product sound student-only if the role serves employers, teams, or platform operations too.",
+    searchTerms: ["career outcomes", "marketplace trust", "student success roles"]
+  }
+];
+
+const defaultCompanyProfile = {
+  id: "universal",
+  type: "company-specific opportunity",
+  signals: ["role evidence", "company vocabulary", "customer or user impact", "measurable ownership", "culture fit"],
+  proofAngle: "Use the company name as a targeting lens, then validate the actual signals with the job post, careers page, product pages, and recent public company materials.",
+  watchout: "Treat unknown company facts as research prompts, not claims. Keep resume changes grounded in proof you can defend.",
+  searchTerms: ["careers page", "company values", "recent product news"]
 };
 
 const trainerScenarios = {
@@ -290,6 +360,8 @@ const output = {
   scorecardSummary: document.querySelector("#scorecardSummary"),
   evaluationScorecard: document.querySelector("#evaluationScorecard"),
   portfolioProofPack: document.querySelector("#portfolioProofPack"),
+  companyInsightSummary: document.querySelector("#companyInsightSummary"),
+  companyBrief: document.querySelector("#companyBrief"),
   taxonomySummary: document.querySelector("#taxonomySummary"),
   errorTaxonomy: document.querySelector("#errorTaxonomy"),
   drillSummary: document.querySelector("#drillSummary"),
@@ -298,21 +370,27 @@ const output = {
   rubricMatrix: document.querySelector("#rubricMatrix"),
   guardrailSummary: document.querySelector("#guardrailSummary"),
   guardrailList: document.querySelector("#guardrailList"),
+  companySignalStatus: document.querySelector("#companySignalStatus"),
+  uploadStatus: document.querySelector("#uploadStatus"),
   applicationKit: document.querySelector("#applicationKit")
 };
 
 const resetButton = document.querySelector("#resetButton");
 const downloadButton = document.querySelector("#downloadButton");
+const analyzeCompanyButton = document.querySelector("#analyzeCompanyButton");
 const copyBulletsButton = document.querySelector("#copyBulletsButton");
 const copyLetterButton = document.querySelector("#copyLetterButton");
 const copyOutreachButton = document.querySelector("#copyOutreachButton");
 const copyProofButton = document.querySelector("#copyProofButton");
 const copyProofPackButton = document.querySelector("#copyProofPackButton");
 const copyKitButton = document.querySelector("#copyKitButton");
+const resumeFileInput = document.querySelector("#resumeFile");
+const resumeUploadButton = document.querySelector("#resumeUploadButton");
+const resumeDropZone = document.querySelector("#resumeDropZone");
 const saveStatus = document.querySelector("#saveStatus");
 const chips = Array.from(document.querySelectorAll(".chip"));
 
-const STORAGE_KEY = "solarplexus-workspace-v3";
+const STORAGE_KEY = "solarplexus-project-moonlight-workspace-v1";
 let currentAnalysis = null;
 let saveTimer = 0;
 let restoringWorkspace = false;
@@ -395,6 +473,55 @@ function currentTrainerScenario() {
   return trainerScenarios[inputs.trainerScenario.value] || trainerScenarios.quality;
 }
 
+function getCompanyProfile(company, target = "") {
+  const haystack = `${company} ${target}`.toLowerCase();
+  return companyProfileLibrary.find((profile) => profile.match.some((term) => haystack.includes(term))) || defaultCompanyProfile;
+}
+
+function buildCompanySignalText(company, target) {
+  const companyName = company.trim() || "Target company";
+  const targetRole = target.trim() || "target role";
+  const profile = getCompanyProfile(companyName, targetRole);
+  return [
+    COMPANY_BRIEF_START,
+    `${companyName} targeting brief for ${targetRole}.`,
+    `Company archetype: ${profile.type}.`,
+    `Signals to validate before applying: ${profile.signals.join(", ")}.`,
+    `Resume positioning angle: ${profile.proofAngle}`,
+    `Evidence boundary: ${profile.watchout}`,
+    `Research checklist: search ${profile.searchTerms.map((term) => `"${companyName} ${term}"`).join(", ")} and compare findings with the job post before making final claims.`,
+    COMPANY_BRIEF_END
+  ].join("\n");
+}
+
+function stripGeneratedCompanyBrief(text) {
+  const pattern = new RegExp(`\\n*${escapeRegExp(COMPANY_BRIEF_START)}[\\s\\S]*?${escapeRegExp(COMPANY_BRIEF_END)}\\n*`, "g");
+  return text.replace(pattern, "\n").trim();
+}
+
+function analyzeCompanyTarget() {
+  const company = inputs.companyName.value.trim();
+  const target = inputs.targetJob.value.trim() || "target role";
+  if (!company) {
+    if (output.companySignalStatus) output.companySignalStatus.textContent = "Enter any company name first.";
+    inputs.companyName.focus();
+    return;
+  }
+  const current = stripGeneratedCompanyBrief(inputs.jobText.value);
+  const generated = buildCompanySignalText(company, target);
+  inputs.jobText.value = [current, generated].filter(Boolean).join("\n\n");
+  analyze();
+  saveWorkspace();
+  const profile = getCompanyProfile(company, target);
+  if (output.companySignalStatus) {
+    output.companySignalStatus.textContent = `${profile.type}: ${profile.signals.slice(0, 3).join(", ")}.`;
+  }
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function renderAll() {
   const { roles, bestRole, signals, keywords, readiness, coverage } = currentAnalysis;
   const company = inputs.companyName.value.trim() || "the company";
@@ -402,7 +529,7 @@ function renderAll() {
   const scenario = currentTrainerScenario();
 
   output.heroTitle.textContent = bestRole.title;
-  output.heroThesis.textContent = `Your strongest Handshake fit is ${bestRole.title} for ${company}. This analyzer turns your resume evidence into role matches, tailored bullets, missing keywords, a company-specific cover letter, and an AI trainer ${scenario.label.toLowerCase()} proof for ${targetJob}.`;
+  output.heroThesis.textContent = `Your strongest career fit is ${bestRole.title} for ${company}. This analyzer turns resume evidence into role matches, tailored bullets, missing keywords, a company-specific cover letter, and an AI trainer ${scenario.label.toLowerCase()} proof for ${targetJob}.`;
   output.proofRoleValue.textContent = bestRole.title;
   output.proofReadinessValue.textContent = `${readiness}%`;
   output.proofCompanyValue.textContent = company;
@@ -417,6 +544,7 @@ function renderAll() {
   output.keywordSummary.textContent = `${keywords.matched.length} matched, ${keywords.missing.length} missing`;
 
   renderRoles(roles);
+  renderCompanyBrief(bestRole, signals, keywords);
   renderManagerBrief(bestRole, signals, keywords);
   renderEvidenceLedger(bestRole, signals, keywords);
   renderSignals(signals);
@@ -466,6 +594,57 @@ function renderRoles(roles) {
       });
 
       card.append(head, summary, meta);
+      return card;
+    })
+  );
+}
+
+function renderCompanyBrief(bestRole, signals, keywords) {
+  const company = inputs.companyName.value.trim() || "target company";
+  const target = inputs.targetJob.value.trim() || bestRole.title;
+  const profile = getCompanyProfile(company, target);
+  const top = strongestEvidence(signals);
+  const validationTerms = profile.searchTerms.map((term) => `${company} ${term}`).slice(0, 3);
+  const cards = [
+    {
+      title: "Company signal",
+      value: profile.type,
+      text: `Treat ${company} as a ${profile.type}. Validate the role against ${profile.signals.slice(0, 3).join(", ")} before final edits.`
+    },
+    {
+      title: "Resume bridge",
+      value: top[0].label,
+      text: `Lead with ${top.map((signal) => signal.label.toLowerCase()).join(", ")} and connect those signals to ${target}.`
+    },
+    {
+      title: "Tailoring angle",
+      value: keywords.matched[0] || bestRole.strengths[0],
+      text: profile.proofAngle
+    },
+    {
+      title: "Truth check",
+      value: "Evidence-safe",
+      text: `${profile.watchout} Research next: ${validationTerms.join("; ")}.`
+    }
+  ];
+
+  if (output.companyInsightSummary) output.companyInsightSummary.textContent = `${profile.type} strategy`;
+  if (output.companySignalStatus) output.companySignalStatus.textContent = `Works with any company. Current lens: ${profile.type}.`;
+  if (!output.companyBrief) return;
+  output.companyBrief.replaceChildren(
+    ...cards.map((item) => {
+      const card = document.createElement("article");
+      card.className = "company-card";
+      const header = document.createElement("header");
+      const title = document.createElement("strong");
+      title.textContent = item.title;
+      const value = document.createElement("span");
+      value.className = "brief-value";
+      value.textContent = item.value;
+      header.append(title, value);
+      const text = document.createElement("p");
+      text.textContent = item.text;
+      card.append(header, text);
       return card;
     })
   );
@@ -621,7 +800,7 @@ function renderBullets(bestRole, signals, keywords) {
     `${verbs[0]} career-facing support workflows by combining ${top[0].label.toLowerCase()} and ${top[1].label.toLowerCase()} to help users turn messy information into clear next steps.`,
     `${verbs[1]} resume and job-post signals to identify role fit, missing keywords, and evidence gaps for ${bestRole.title} opportunities.`,
     `${verbs[2]} complex ideas into recruiter-ready language, using ${keywords.matched.slice(0, 3).join(", ") || "role-specific evidence"} to connect experience with ${company}'s needs.`,
-    `Applied responsible AI judgment by reviewing output quality, preserving authentic candidate stories, and avoiding generic application language.`
+    "Applied responsible AI judgment by reviewing output quality, preserving authentic candidate stories, and avoiding generic application language."
   ];
 
   output.bulletList.replaceChildren(
@@ -930,7 +1109,7 @@ function renderPortfolioProofPack(bestRole, signals, keywords) {
     {
       title: "Showcase preview",
       status: "qa-desktop.png",
-      text: "Use the refreshed desktop screenshot as the Handshake preview so reviewers see the premium cockpit immediately."
+      text: "Use the refreshed desktop screenshot as the project showcase preview so reviewers see the premium cockpit immediately."
     },
     {
       title: "AI trainer work sample",
@@ -1112,7 +1291,7 @@ function renderOutreachMessage(bestRole, keywords) {
 
 I am interested in the ${target} role and wanted to share a concise reason I think my background is worth a closer look. My strongest fit is ${bestRole.title}, especially around ${proof}. I have been building career-facing AI tools that turn resume and job-post signals into transparent recommendations, while keeping candidate claims evidence-based and interview-defensible.
 
-The project linked in my application, SolaRPlexus, demonstrates the same judgment I would bring to the role: it compares job fit, identifies missing evidence, drafts tailored materials, audits generic AI writing, and includes an AI-trainer proof sample with rubric calibration. It connects directly to role signals like ${matched}.
+The project linked in my application, ${PROJECT_NAME}, demonstrates the same judgment I would bring to the role: it compares job fit, identifies missing evidence, drafts tailored materials, audits generic AI writing, and includes an AI-trainer proof sample with rubric calibration. It connects directly to role signals like ${matched}.
 
 Thank you for considering my application. I would be grateful for the chance to discuss how I can contribute careful evaluation, clear writing, and responsible AI judgment to ${company}.`;
 }
@@ -1218,12 +1397,179 @@ function summarizeResume(text) {
   return parts.join(", ");
 }
 
+function cleanExtractedResumeText(text) {
+  return text
+    .replace(/\u0000/g, " ")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/[ \t]{2,}/g, " ")
+    .trim();
+}
+
+function setUploadStatus(text, tone = "") {
+  if (output.uploadStatus) output.uploadStatus.textContent = text;
+  if (resumeDropZone) resumeDropZone.classList.toggle("has-error", tone === "error");
+}
+
+async function handleResumeFile(file) {
+  if (!file) return;
+  setUploadStatus(`Reading ${file.name}...`);
+  try {
+    const extracted = cleanExtractedResumeText(await extractResumeText(file));
+    const totalWords = words(extracted).length;
+    if (totalWords < 12) {
+      throw new Error("I could not find enough readable resume text. Try DOCX, TXT, or paste the resume text directly.");
+    }
+    inputs.resumeText.value = extracted;
+    analyze();
+    saveWorkspace();
+    setUploadStatus(`Loaded ${file.name} (${totalWords} words).`);
+  } catch (error) {
+    setUploadStatus(error.message || "This file could not be read. Try exporting the resume as DOCX or TXT.", "error");
+  } finally {
+    if (resumeFileInput) resumeFileInput.value = "";
+  }
+}
+
+async function extractResumeText(file) {
+  const name = file.name.toLowerCase();
+  if (name.endsWith(".docx")) return extractDocxText(await file.arrayBuffer());
+  if (name.endsWith(".pdf")) return extractPdfText(await file.arrayBuffer());
+  const raw = await file.text();
+  if (name.endsWith(".rtf") || file.type.includes("rtf")) return stripRtf(raw);
+  if (name.endsWith(".txt") || name.endsWith(".md") || file.type.startsWith("text/") || !file.type) return raw;
+  throw new Error("Supported resume files are TXT, MD, RTF, DOCX, and text-based PDFs.");
+}
+
+function stripRtf(raw) {
+  return raw
+    .replace(/\\par[d]?/gi, "\n")
+    .replace(/\\line/gi, "\n")
+    .replace(/\\tab/gi, " ")
+    .replace(/\\'[0-9a-f]{2}/gi, (match) => String.fromCharCode(parseInt(match.slice(2), 16)))
+    .replace(/\\[a-z]+\d* ?/gi, "")
+    .replace(/[{}]/g, " ")
+    .replace(/\s+\n/g, "\n")
+    .replace(/[ \t]{2,}/g, " ");
+}
+
+function readUint16(view, offset) {
+  return view.getUint16(offset, true);
+}
+
+function readUint32(view, offset) {
+  return view.getUint32(offset, true);
+}
+
+function findEndOfCentralDirectory(view) {
+  for (let offset = view.byteLength - 22; offset >= 0; offset -= 1) {
+    if (readUint32(view, offset) === 0x06054b50) return offset;
+  }
+  return -1;
+}
+
+function findZipEntry(buffer, entryName) {
+  const bytes = new Uint8Array(buffer);
+  const view = new DataView(buffer);
+  const decoder = new TextDecoder("utf-8");
+  const eocd = findEndOfCentralDirectory(view);
+  if (eocd < 0) throw new Error("This DOCX file could not be opened as a resume document.");
+  const entryCount = readUint16(view, eocd + 10);
+  let offset = readUint32(view, eocd + 16);
+  for (let index = 0; index < entryCount; index += 1) {
+    if (readUint32(view, offset) !== 0x02014b50) break;
+    const method = readUint16(view, offset + 10);
+    const compressedSize = readUint32(view, offset + 20);
+    const fileNameLength = readUint16(view, offset + 28);
+    const extraLength = readUint16(view, offset + 30);
+    const commentLength = readUint16(view, offset + 32);
+    const localHeaderOffset = readUint32(view, offset + 42);
+    const nameStart = offset + 46;
+    const name = decoder.decode(bytes.slice(nameStart, nameStart + fileNameLength));
+    if (name === entryName) {
+      const localFileNameLength = readUint16(view, localHeaderOffset + 26);
+      const localExtraLength = readUint16(view, localHeaderOffset + 28);
+      const dataStart = localHeaderOffset + 30 + localFileNameLength + localExtraLength;
+      return { method, data: bytes.slice(dataStart, dataStart + compressedSize) };
+    }
+    offset += 46 + fileNameLength + extraLength + commentLength;
+  }
+  return null;
+}
+
+async function inflateZipEntry(entry) {
+  if (entry.method === 0) return entry.data;
+  if (entry.method !== 8) throw new Error("This DOCX compression format is not supported in the browser.");
+  if (!("DecompressionStream" in window)) {
+    throw new Error("This browser cannot unpack DOCX files. Try TXT, MD, or paste the resume text.");
+  }
+  const stream = new Blob([entry.data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function extractDocxText(buffer) {
+  const entry = findZipEntry(buffer, "word/document.xml");
+  if (!entry) throw new Error("I could not find resume text inside this DOCX file.");
+  const xml = new TextDecoder("utf-8").decode(await inflateZipEntry(entry));
+  return decodeXmlEntities(
+    xml
+      .replace(/<w:tab\/>/g, " ")
+      .replace(/<\/w:p>/g, "\n")
+      .replace(/<[^>]+>/g, " ")
+  );
+}
+
+function decodeXmlEntities(text) {
+  const named = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" };
+  return text
+    .replace(/&([a-z]+);/gi, (match, entity) => named[entity] || match)
+    .replace(/&#(\d+);/g, (match, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (match, code) => String.fromCodePoint(parseInt(code, 16)));
+}
+
+function extractPdfText(buffer) {
+  const raw = decodePdfBytes(buffer);
+  const pieces = [];
+  const operators = raw.match(/(?:\((?:\\.|[^\\()])*\)|\[(?:[\s\S]*?)\])\s*T[Jj]/g) || [];
+  operators.forEach((operator) => {
+    const literalStrings = operator.match(/\((?:\\.|[^\\()])*\)/g) || [];
+    literalStrings.forEach((literal) => pieces.push(decodePdfLiteral(literal.slice(1, -1))));
+  });
+  const directText = cleanExtractedResumeText(pieces.join(" "));
+  if (words(directText).length >= 20) return directText;
+  const fallback = cleanExtractedResumeText(
+    (raw.match(/[A-Za-z][A-Za-z0-9 @.,;:'"()/%&+\-\n]{20,}/g) || []).join(" ")
+  );
+  if (words(fallback).length >= 20) return fallback;
+  throw new Error("This PDF looks scanned or compressed. Upload DOCX/TXT or paste the resume text directly.");
+}
+
+function decodePdfBytes(buffer) {
+  try {
+    return new TextDecoder("latin1").decode(buffer);
+  } catch {
+    return new TextDecoder("utf-8").decode(buffer);
+  }
+}
+
+function decodePdfLiteral(value) {
+  return value
+    .replace(/\\([nrtbf()\\])/g, (match, code) => {
+      const map = { n: "\n", r: "\r", t: "\t", b: "\b", f: "\f", "(": "(", ")": ")", "\\": "\\" };
+      return map[code] || code;
+    })
+    .replace(/\\([0-7]{1,3})/g, (match, code) => String.fromCharCode(parseInt(code, 8)));
+}
+
 function renderApplicationKit() {
   const { bestRole, keywords, readiness } = currentAnalysis;
   const company = inputs.companyName.value.trim() || "Target Company";
   const target = inputs.targetJob.value.trim() || bestRole.title;
   const bullets = [...output.bulletList.querySelectorAll("li")].map((li) => `- ${li.textContent}`).join("\n");
   const brief = [...output.managerBrief.querySelectorAll(".brief-card")]
+    .map((card) => `- ${card.querySelector("strong").textContent}: ${card.querySelector("p").textContent}`)
+    .join("\n");
+  const companyBrief = [...output.companyBrief.querySelectorAll(".company-card")]
     .map((card) => `- ${card.querySelector("strong").textContent}: ${card.querySelector("p").textContent}`)
     .join("\n");
   const ledger = [...output.evidenceLedger.querySelectorAll(".ledger-row")]
@@ -1267,7 +1613,7 @@ function renderApplicationKit() {
     .join("\n");
   const proofPack = proofPackText();
 
-  output.applicationKit.value = `# SolaRPlexus Application Kit
+  output.applicationKit.value = `# ${PROJECT_NAME} Application Kit
 
 ## Target
 Company: ${company}
@@ -1280,6 +1626,9 @@ Lead with ${bestRole.strengths.join(", ")}. The strongest matched keywords are $
 
 ## Hiring manager candidate brief
 ${brief}
+
+## Company match brief
+${companyBrief}
 
 ## Evidence ledger
 ${ledger}
@@ -1405,7 +1754,7 @@ function applyExample(name) {
 }
 
 function downloadKit() {
-  const filename = "solarplexus-application-kit.md";
+  const filename = "solarplexus-project-moonlight-application-kit.md";
   const blob = new Blob([output.applicationKit.value], { type: "text/markdown" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -1506,6 +1855,50 @@ function restoreWorkspace() {
   } finally {
     restoringWorkspace = false;
   }
+}
+
+if (resumeUploadButton && resumeFileInput) {
+  resumeUploadButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    resumeFileInput.click();
+  });
+}
+
+if (resumeFileInput) {
+  resumeFileInput.addEventListener("change", () => {
+    handleResumeFile(resumeFileInput.files[0]);
+  });
+}
+
+if (resumeDropZone && resumeFileInput) {
+  resumeDropZone.addEventListener("click", (event) => {
+    if (event.target !== resumeUploadButton && event.target !== resumeFileInput) resumeFileInput.click();
+  });
+  resumeDropZone.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      resumeFileInput.click();
+    }
+  });
+  ["dragenter", "dragover"].forEach((name) => {
+    resumeDropZone.addEventListener(name, (event) => {
+      event.preventDefault();
+      resumeDropZone.classList.add("is-dragging");
+    });
+  });
+  ["dragleave", "drop"].forEach((name) => {
+    resumeDropZone.addEventListener(name, (event) => {
+      event.preventDefault();
+      resumeDropZone.classList.remove("is-dragging");
+    });
+  });
+  resumeDropZone.addEventListener("drop", (event) => {
+    handleResumeFile(event.dataTransfer.files[0]);
+  });
+}
+
+if (analyzeCompanyButton) {
+  analyzeCompanyButton.addEventListener("click", analyzeCompanyTarget);
 }
 
 Object.values(inputs).forEach((input) => {

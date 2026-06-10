@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SolaRPlexus</title>
+    <title>SolaRPlexus Project Moonlight</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
 
     <main class="app-shell">
       <header class="topbar">
-        <a class="brand" href="#" aria-label="SolaRPlexus home">
+        <a class="brand" href="#" aria-label="SolaRPlexus Project Moonlight home">
           <span class="brand-emblem" aria-hidden="true">
             <span class="brand-sun"></span>
             <span class="brand-ring ring-one"></span>
@@ -21,7 +21,7 @@
           </span>
           <span class="brand-copy">
             <strong><span>SolaR</span><span>Plexus</span></strong>
-            <small>AI trainer career intelligence</small>
+            <small>Project Moonlight career intelligence</small>
           </span>
         </a>
         <div class="topbar-actions">
@@ -59,7 +59,7 @@
           </article>
           <article>
             <span>Company</span>
-            <strong id="proofCompanyValue">Handshake</strong>
+            <strong id="proofCompanyValue">OpenAI</strong>
           </article>
           <article>
             <span>Evidence Pack</span>
@@ -82,17 +82,29 @@
 
           <label class="field">
             <span>Company</span>
-            <input id="companyName" type="text" value="Handshake" />
+            <input id="companyName" type="text" value="OpenAI" />
           </label>
+          <div class="company-actions">
+            <button class="ghost-button" id="analyzeCompanyButton" type="button">Analyze company</button>
+            <span id="companySignalStatus">Works with any company name.</span>
+          </div>
 
           <label class="field">
             <span>Resume or background notes</span>
             <textarea id="resumeText" rows="9">Peer mentor and student club operations lead with experience writing clear feedback, analyzing survey data in Excel, building dashboards, facilitating workshops, documenting decisions, and helping students improve resumes and career stories. Comfortable using AI tools responsibly, comparing outputs, and explaining recommendations to non-technical audiences.</textarea>
           </label>
+          <div class="upload-card" id="resumeDropZone" tabindex="0" role="button" aria-label="Upload resume file">
+            <input id="resumeFile" class="file-input" type="file" accept=".txt,.md,.rtf,.docx,.pdf,text/plain,text/markdown,application/rtf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            <div>
+              <span class="upload-title">Upload resume</span>
+              <p id="uploadStatus">Drop a resume file or choose TXT, MD, RTF, DOCX, or PDF.</p>
+            </div>
+            <button class="ghost-button" id="resumeUploadButton" type="button">Choose file</button>
+          </div>
 
           <label class="field">
             <span>Job post or company signals</span>
-            <textarea id="jobText" rows="8">The role needs strong writing, data judgment, quality review, AI tool fluency, attention to detail, stakeholder communication, inclusive thinking, and the ability to turn messy information into clear recommendations for students and employers.</textarea>
+            <textarea id="jobText" rows="8">The role needs strong writing, data judgment, quality review, AI tool fluency, attention to detail, stakeholder communication, inclusive thinking, and the ability to turn messy information into clear recommendations for users, teams, and reviewers.</textarea>
           </label>
 
           <div class="control-group">
@@ -190,12 +202,23 @@
           <section class="section-block full-span">
             <div class="section-title">
               <div>
-                <p class="eyebrow">Handshake forum fit</p>
+                <p class="eyebrow">Job marketplace fit</p>
                 <h3>Recommended Job Matches</h3>
               </div>
               <span id="fitSummary">ranked from resume evidence</span>
             </div>
             <div id="roleCards" class="role-grid"></div>
+          </section>
+
+          <section class="section-block full-span company-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">Universal company targeting</p>
+                <h3>Company Match Brief</h3>
+              </div>
+              <span id="companyInsightSummary">company-specific signals</span>
+            </div>
+            <div id="companyBrief" class="company-brief"></div>
           </section>
 
           <div class="section-grid">
@@ -326,7 +349,7 @@
           <section class="section-block full-span premium-panel">
             <div class="section-title">
               <div>
-                <p class="eyebrow">Handshake outreach</p>
+                <p class="eyebrow">Recruiter outreach</p>
                 <h3>Recruiter Message Studio</h3>
               </div>
               <button class="ghost-button" id="copyOutreachButton" type="button">

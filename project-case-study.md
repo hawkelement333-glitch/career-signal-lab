@@ -1,22 +1,23 @@
-# SolaRPlexus Case Study
+# SolaRPlexus Project Moonlight Case Study
 
 ## One-line summary
 
-SolaRPlexus is a resume analyzer that helps job seekers find their best-fit role, tailor their resume, generate a company-specific cover letter, and produce an AI-trainer proof-of-judgment sample.
+SolaRPlexus Project Moonlight is a resume analyzer that helps job seekers upload a resume, find their best-fit role, tailor for any company, generate a company-specific cover letter, and produce an AI-trainer proof-of-judgment sample.
 
 ## Problem
 
-Students are often told to "tailor your resume," but that advice is vague. Many candidates do not know which jobs fit their background, which keywords are missing, or how to write a cover letter that sounds specific instead of AI-generated.
+Students are often told to "tailor your resume," but that advice is vague. Many candidates do not know which jobs fit their background, which keywords are missing, how to research a specific company without hallucinating claims, or how to write a cover letter that sounds specific instead of AI-generated.
 
 ## Product solution
 
-I built a local web app that turns resume notes and job-post language into a complete application strategy. The app recommends role families, scores resume signals, identifies matched and missing keywords, creates a hiring-manager brief, separates claims from evidence, creates tailored bullets, drafts a recruiter outreach message, prepares interview prompts, audits cover-letter believability, generates a model-evaluation scorecard, packages a showcase proof pack, and exports a complete application kit. The interface borrows the premium galaxy-and-glass direction from Solarplexus so the product feels more like an investor-backed career cockpit than a simple form.
+I built a local web app that turns uploaded resume files, resume notes, company names, and job-post language into a complete application strategy. The app recommends role families, scores resume signals, identifies matched and missing keywords, creates a universal company match brief, creates a hiring-manager brief, separates claims from evidence, creates tailored bullets, drafts a recruiter outreach message, prepares interview prompts, audits cover-letter believability, generates a model-evaluation scorecard, packages a showcase proof pack, and exports a complete application kit. The interface borrows the premium galaxy-and-glass direction from Solarplexus so the product feels more like an investor-backed career cockpit than a simple form.
 
 ## Why it is useful
 
 The product helps a candidate move from uncertainty to action:
 
 - Which jobs fit me best?
+- How should I tailor this resume for any company I enter?
 - What proof should I lead with?
 - Which keywords are missing?
 - How do I tailor my resume without exaggerating?
@@ -30,6 +31,8 @@ The Proof of Judgment Lab creates a small model-evaluation work sample. It lets 
 ## Responsible AI choices
 
 - The app runs locally and does not send resume text to external services.
+- Resume files are parsed in the browser, then used to refresh every analyzer section.
+- Company targeting is presented as a validation brief, not as fake live research.
 - It shows matched and missing keywords instead of hiding the scoring.
 - It warns users not to add keywords unless they have real evidence.
 - It includes an evidence ledger and guardrails that separate true proof from unsupported claims.
@@ -39,7 +42,7 @@ The Proof of Judgment Lab creates a small model-evaluation work sample. It lets 
 
 ## What I would improve next
 
-- Add PDF resume upload.
+- Add stronger scanned-PDF/OCR support.
 - Add saved application kits for multiple companies.
 - Add a custom rubric editor for different industries.
 - Add reviewer comments from mentors or career coaches.
@@ -49,6 +52,8 @@ The Proof of Judgment Lab creates a small model-evaluation work sample. It lets 
 
 - Product strategy
 - Career coaching UX
+- Resume file parsing
+- Universal company targeting
 - Resume and job-post signal extraction
 - Recommendation logic
 - Data visualization
