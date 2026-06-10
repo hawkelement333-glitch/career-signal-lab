@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Career Signal Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div>
+            <p class="eyebrow">AI portfolio builder</p>
+            <h1>Career Signal Lab</h1>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="resetButton" type="button" aria-label="Reset workspace" title="Reset workspace">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M3 12a9 9 0 1 0 3-6.7" />
+              <path d="M3 3v6h6" />
+            </svg>
+          </button>
+          <button class="primary-button" id="downloadButton" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M12 3v12" />
+              <path d="m7 10 5 5 5-5" />
+              <path d="M5 21h14" />
+            </svg>
+            Export pitch
+          </button>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Career project generator">
+        <aside class="input-panel" aria-label="Inputs">
+          <div class="panel-heading">
+            <p class="eyebrow">Profile</p>
+            <h2>Your target</h2>
+          </div>
+
+          <label class="field">
+            <span>Target role</span>
+            <input id="targetRole" type="text" value="AI Product Analyst Intern" />
+          </label>
+
+          <label class="field">
+            <span>Field or mission</span>
+            <input id="mission" type="text" value="Helping first-generation students find roles that match their strengths" />
+          </label>
+
+          <label class="field">
+            <span>Profile notes</span>
+            <textarea id="profileNotes" rows="7">Built a student club dashboard in Python, led peer mentoring workshops, analyzed survey data in Excel, and designed onboarding materials for new members.</textarea>
+          </label>
+
+          <label class="field">
+            <span>Job description or employer signals</span>
+            <textarea id="jobSignals" rows="7">Looking for someone who can use AI tools, build dashboards, explain insights to stakeholders, work with messy data, and design responsible user experiences.</textarea>
+          </label>
+
+          <div class="control-group">
+            <span class="control-label">Build window</span>
+            <div class="segmented" role="radiogroup" aria-label="Build window">
+              <label>
+                <input type="radio" name="window" value="weekend" />
+                <span>Weekend</span>
+              </label>
+              <label>
+                <input type="radio" name="window" value="week" checked />
+                <span>1 week</span>
+              </label>
+              <label>
+                <input type="radio" name="window" value="sprint" />
+                <span>2 weeks</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Project angle</span>
+            <select id="projectAngle">
+              <option value="responsible-ai">Responsible AI</option>
+              <option value="automation">Workflow automation</option>
+              <option value="analytics">Decision analytics</option>
+              <option value="ux-research">UX research</option>
+            </select>
+          </div>
+
+          <div class="examples">
+            <span class="control-label">Sample starters</span>
+            <div class="chip-row">
+              <button class="chip active" type="button" data-example="product">Product</button>
+              <button class="chip" type="button" data-example="data">Data</button>
+              <button class="chip" type="button" data-example="software">Software</button>
+              <button class="chip" type="button" data-example="research">Research</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="output-panel" aria-live="polite">
+          <div class="project-hero">
+            <div>
+              <p class="eyebrow">Recommended showcase project</p>
+              <h2 id="projectTitle">Opportunity Lens</h2>
+              <p id="projectThesis" class="thesis"></p>
+            </div>
+            <div class="score-dial" aria-label="Employer signal score">
+              <svg viewBox="0 0 120 120" role="img" aria-labelledby="scoreLabel">
+                <title id="scoreLabel">Employer signal score</title>
+                <circle class="track" cx="60" cy="60" r="48"></circle>
+                <circle class="progress" id="scoreCircle" cx="60" cy="60" r="48"></circle>
+              </svg>
+              <div>
+                <strong id="signalScore">86</strong>
+                <span>signal</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric">
+              <span>Role fit</span>
+              <strong id="roleFit">High</strong>
+            </article>
+            <article class="metric">
+              <span>Differentiator</span>
+              <strong id="differentiator">Explainable AI</strong>
+            </article>
+            <article class="metric">
+              <span>Demo size</span>
+              <strong id="demoSize">7 days</strong>
+            </article>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block">
+              <div class="section-title">
+                <h3>Skill Evidence</h3>
+                <span id="coverageText">6 matched signals</span>
+              </div>
+              <div class="bar-list" id="skillBars"></div>
+            </section>
+
+            <section class="section-block">
+              <div class="section-title">
+                <h3>Signal Map</h3>
+                <span>fit, proof, story</span>
+              </div>
+              <canvas id="signalCanvas" width="520" height="320" aria-label="Career signal map"></canvas>
+            </section>
+          </div>
+
+          <div class="section-grid">
+            <section class="section-block">
+              <div class="section-title">
+                <h3>Build Plan</h3>
+                <span id="planPace">1 week sprint</span>
+              </div>
+              <ol class="timeline" id="timeline"></ol>
+            </section>
+
+            <section class="section-block">
+              <div class="section-title">
+                <h3>AI Methods</h3>
+                <span>transparent prototype</span>
+              </div>
+              <ul class="method-list" id="methodList"></ul>
+            </section>
+          </div>
+
+          <section class="section-block full-span">
+            <div class="section-title">
+              <h3>Showcase Pitch</h3>
+              <button class="ghost-button" id="copyButton" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="pitchText" class="pitch-box" rows="7" readonly></textarea>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
