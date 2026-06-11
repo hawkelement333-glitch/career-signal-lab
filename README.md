@@ -3,7 +3,7 @@
 SolaRPlexus Project Moonlight is a premium resume analyzer and application-tailoring workspace for students and early-career job seekers. It helps a candidate upload or paste their resume, enter any target company and job title, compare likely job fits, identify missing evidence, rewrite resume bullets, and generate company-specific application materials.
 ## Live Demo
 
-Try the app here: https://hawkelement333-glitch.github.io/Solar-Plexus/
+Try the app here: [https://hawkelement333-glitch.github.io/career-signal-lab]
 
 
 ## Features
