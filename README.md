@@ -58,6 +58,13 @@ For AI trainer roles, the app creates a proof-of-judgment artifact: a scenario-s
 
 ## Future upgrades
 
+
+## License / Usage
+
+Copyright © 2026 Patrick Parke. All rights reserved.
+
+This project is public for portfolio, review, and demonstration purposes only. No permission is granted to copy, modify, distribute, sublicense, sell, or use this code, design, scoring logic, written materials, or project structure in another product or service without written permission from the author.
+
 - Add saved application kits for multiple jobs.
 - Add stronger PDF parsing and scanned-resume OCR.
 - Add custom role libraries for specific majors.
