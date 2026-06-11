@@ -38,12 +38,11 @@ Try the app here: [https://hawkelement333-glitch.github.io/career-signal-lab]
 
 ## How it works
 
-The app uses transparent local JavaScript heuristics. It compares resume evidence and job-post language against a role library and signal taxonomy. The output is intentionally inspectable so the candidate can decide what to keep, edit, or remove. The workspace also autosaves locally in the browser so the candidate can refresh without losing their tailoring work.
+The app uses transparent local JavaScript logic to compare resume content with job-post language and produce inspectable career-readiness feedback. The goal is to help candidates understand their strengths, identify missing evidence, and make informed edits before applying.
 
-The cover letter generator synthesizes the resume, target job, and company into a draft, similar to the pattern used by modern premium job-search tools. The company matcher works offline by creating a transparent targeting brief from the company name and role, then asking the user to validate details against the real job post and public company materials. The app also includes an authenticity check so the candidate does not submit generic AI language they cannot defend in an interview.
+The workspace supports resume review, job targeting, application-material drafting, and authenticity checks so users can avoid generic claims they cannot explain in an interview. It is designed as a portfolio-ready demonstration of practical AI-assisted career tooling, not as a black-box hiring decision system.
 
-For AI trainer roles, the app creates a proof-of-judgment artifact: a scenario-specific prompt, two model responses, a preferred label, a rationale, a criterion-level scorecard, and a calibration matrix. This shows that the candidate can evaluate AI output, not just use AI to generate application materials.
-
+For AI trainer and evaluation-focused roles, the app includes structured exercises that demonstrate judgment, comparison, rationale writing, rubric-based review, and responsible use of generated content.
 
 - Product thinking
 - Resume and job-post analysis
@@ -57,7 +56,11 @@ For AI trainer roles, the app creates a proof-of-judgment artifact: a scenario-s
 - Preference rationale writing
 
 ## Future upgrades
-
+- Add saved application kits for multiple jobs.
+- Add stronger PDF parsing and scanned-resume OCR.
+- Add custom role libraries for specific majors.
+- Add reviewer feedback and version history.
+- Add optional LLM-assisted rewriting while keeping human edits visible.
 
 ## License / Usage
 
@@ -65,8 +68,4 @@ Copyright © 2026 Patrick Parke. All rights reserved.
 
 This project is public for portfolio, review, and demonstration purposes only. No permission is granted to copy, modify, distribute, sublicense, sell, or use this code, design, scoring logic, written materials, or project structure in another product or service without written permission from the author.
 
-- Add saved application kits for multiple jobs.
-- Add stronger PDF parsing and scanned-resume OCR.
-- Add custom role libraries for specific majors.
-- Add reviewer feedback and version history.
-- Add optional LLM-assisted rewriting while keeping human edits visible.
+
