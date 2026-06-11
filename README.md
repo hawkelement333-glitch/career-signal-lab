@@ -8,33 +8,17 @@ Try the app here: [https://hawkelement333-glitch.github.io/career-signal-lab]
 
 ## Features
 
-- Resume upload and job-post analyzer
-- Best-fit job recommendation across multiple career paths
-- Universal company targeting for any company name
-- Target job title and company tailoring
-- Role match cards across multiple career paths
-- Hiring-manager candidate brief
-- Evidence ledger for interview-defensible claims
-- Recruiter seven-second scan
-- Resume signal map and fit radar
-- Tailored resume bullet generator
-- ATS-style keyword plan
-- Skill gap planner
-- Interview story builder
-- Company-specific cover letter draft
-- Recruiter outreach message
-- Cover letter authenticity audit
-- AI trainer scenario selector
-- AI trainer proof-of-judgment lab
-- Model evaluation scorecard
-- Showcase proof pack
-- AI trainer error taxonomy
-- Rubric calibration matrix
-- Interview drill
-- Application integrity guardrails
+- Resume and job-post review
+- Job-fit comparison across multiple career paths
+- Company and role targeting support
+- Career-readiness feedback
+- Application-material drafting support
+- Interview preparation prompts
+- Responsible AI usage checks
+- AI evaluation and rationale-writing exercises
 - Local browser autosave
-- Exportable application kit
-- SolaRPlexus Project Moonlight premium visual theme
+- Exportable application materials
+- Portfolio-ready project documentation
 
 ## How it works
 
