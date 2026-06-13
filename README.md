@@ -6,6 +6,12 @@ SolaRPlexus Project Moonlight is a fully functional browser-based resume analyze
 
 Use the app here: [Live App](https://hawkelement333-glitch.github.io/career-signal-lab)
 
+## Employer proof
+
+- [Case Study](CASE_STUDY.md) — product problem, architecture, engineering decisions, QA, limitations, and app-builder value.
+- [QA Report](QA_REPORT.md) — verification and stress-test notes.
+- [Notice](NOTICE.md) — ownership and public-use terms.
+
 ## Features
 
 - Resume and job-post review
@@ -27,6 +33,10 @@ The app uses transparent local JavaScript logic to compare resume content with j
 The workspace supports resume review, job targeting, application-material drafting, and authenticity checks so users can avoid generic claims they cannot explain in an interview. It is designed as a usable public career-tooling web app, not as a black-box hiring decision system.
 
 For AI trainer and evaluation-focused roles, the app includes structured exercises that demonstrate judgment, comparison, rationale writing, rubric-based review, and responsible use of generated content.
+
+## Why this matters for software-development roles
+
+Project Moonlight shows practical app-creator ability: user workflow design, frontend architecture, local file handling, state persistence, recommendation logic, data presentation, export behavior, documentation, and responsible product boundaries.
 
 ## Skills demonstrated
 
@@ -53,4 +63,4 @@ For AI trainer and evaluation-focused roles, the app includes structured exercis
 
 Copyright © 2026 Patrick Parke. All rights reserved.
 
-This project is public for portfolio review, personal use, and live web-app access. No permission is granted to copy, modify, distribute, sublicense, sell, train on, scrape, repackage, or use this code, design, scoring logic, written materials, or project structure in another product or service without written permission from the author.
+This project is public for portfolio review, personal use, and live web-app access. Reuse of the code, design, scoring logic, written materials, or project structure in another product or service requires written permission from the author.
