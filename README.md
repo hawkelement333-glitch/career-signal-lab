@@ -1,10 +1,10 @@
 # SolaRPlexus Project Moonlight
 
-SolaRPlexus Project Moonlight is a premium resume analyzer and application-tailoring workspace for students and early-career job seekers. It helps a candidate upload or paste their resume, enter any target company and job title, compare likely job fits, identify missing evidence, rewrite resume bullets, and generate company-specific application materials.
-## Live Demo
+SolaRPlexus Project Moonlight is a fully functional browser-based resume analyzer and application-tailoring workspace for students and early-career job seekers. It helps a candidate upload or paste a resume, enter any target company and job title, compare likely job fits, identify missing evidence, rewrite resume bullets, and generate company-specific application materials.
 
-Try the app here: [Live Demo](https://hawkelement333-glitch.github.io/career-signal-lab)
+## Live App
 
+Use the app here: [Live App](https://hawkelement333-glitch.github.io/career-signal-lab)
 
 ## Features
 
@@ -24,9 +24,11 @@ Try the app here: [Live Demo](https://hawkelement333-glitch.github.io/career-sig
 
 The app uses transparent local JavaScript logic to compare resume content with job-post language and produce inspectable career-readiness feedback. The goal is to help candidates understand their strengths, identify missing evidence, and make informed edits before applying.
 
-The workspace supports resume review, job targeting, application-material drafting, and authenticity checks so users can avoid generic claims they cannot explain in an interview. It is designed as a portfolio-ready demonstration of practical AI-assisted career tooling, not as a black-box hiring decision system.
+The workspace supports resume review, job targeting, application-material drafting, and authenticity checks so users can avoid generic claims they cannot explain in an interview. It is designed as a usable public career-tooling web app, not as a black-box hiring decision system.
 
 For AI trainer and evaluation-focused roles, the app includes structured exercises that demonstrate judgment, comparison, rationale writing, rubric-based review, and responsible use of generated content.
+
+## Skills demonstrated
 
 - Product thinking
 - Resume and job-post analysis
@@ -40,6 +42,7 @@ For AI trainer and evaluation-focused roles, the app includes structured exercis
 - Preference rationale writing
 
 ## Future upgrades
+
 - Add saved application kits for multiple jobs.
 - Add stronger PDF parsing and scanned-resume OCR.
 - Add custom role libraries for specific majors.
@@ -50,6 +53,4 @@ For AI trainer and evaluation-focused roles, the app includes structured exercis
 
 Copyright © 2026 Patrick Parke. All rights reserved.
 
-This project is public for portfolio, review, and demonstration purposes only. No permission is granted to copy, modify, distribute, sublicense, sell, or use this code, design, scoring logic, written materials, or project structure in another product or service without written permission from the author.
-
-
+This project is public for portfolio review, personal use, and live web-app access. No permission is granted to copy, modify, distribute, sublicense, sell, train on, scrape, repackage, or use this code, design, scoring logic, written materials, or project structure in another product or service without written permission from the author.
